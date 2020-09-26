@@ -3,8 +3,8 @@ import React from "react";
 function TableEmployee(props) {
   return (
     <div>
-      <table className="table">
-        <thead>
+      <table className="table table-hover table-striped table-light">
+        <thead className="thead-light">
           <tr>
             <th scope="col">Image</th>
             <th scope="col">Name</th>

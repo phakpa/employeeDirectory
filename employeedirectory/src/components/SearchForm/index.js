@@ -1,8 +1,9 @@
 import React from "react";
+import "./style.css";
 
 function SearchForm(props) {
   return (
-    <div>
+    <div className="center-align">
       <form>
         <span>Search Employee: </span>
         <input
