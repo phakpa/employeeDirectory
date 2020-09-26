@@ -62,16 +62,12 @@ class Home extends Component {
     });
 
     if (tempStr !== "") {
-      console.log("Search: " + tempStr);
-      //if search value true code here
       let origResults = this.state.result;
+      let tempResult = origResults.filter((x) =>
+        x.name.last.toLowerCase().includes(tempStr.toLowerCase())
+      );
 
-      let tempResult = origResults.filter((e) => {
-        return e.name.first === tempStr;
-      });
       console.log(tempResult);
-
-      //   console.log(this.state.result);
 
       let results = tempResult;
       let image = [];
@@ -106,8 +102,6 @@ class Home extends Component {
         dob: newDob,
       });
     } else {
-      console.log("Search: " + tempStr);
-      //if nothing in search code here
       let results = this.state.result;
       let image = [];
       let name = [];
