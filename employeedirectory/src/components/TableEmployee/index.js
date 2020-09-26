@@ -21,7 +21,9 @@ function TableEmployee(props) {
               </th>
               <td>{props.name[index]}</td>
               <td>{props.phone[index]}</td>
-              <td>{props.email[index]}</td>
+              <td>
+                <a href="mailto:">{props.email[index]}</a>
+              </td>
               <td>{props.dob[index]}</td>
             </tr>
           </tbody>

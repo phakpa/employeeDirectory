@@ -5,13 +5,13 @@ import TableEmployee from "../components/TableEmployee";
 
 class Home extends Component {
   state = {
-    search: "",
+    result: [],
     image: [],
     name: [],
     phone: [],
     email: [],
     dob: [],
-    counter: 0,
+    search: "",
   };
 
   componentDidMount() {
@@ -22,21 +22,32 @@ class Home extends Component {
         let name = [];
         let phone = [];
         let email = [];
-        let dob = [];
+        let dob = results.map((e) => {
+          return e.dob.date.slice(0, 10);
+        });
+
+        let newDob = [];
+        for (let i = 0; i < dob.length; i++) {
+          let year = dob[i].slice(0, 4);
+
+          let month = dob[i].slice(5, 7);
+          let day = dob[i].slice(8, 10);
+          newDob.push(month + "-" + day + "-" + year);
+        }
 
         for (let i = 0; i < results.length; i++) {
           image.push(results[i].picture.medium);
           name.push(results[i].name.first + " " + results[i].name.last);
           phone.push(results[i].phone);
           email.push(results[i].email);
-          dob.push(results[i].dob.date);
         }
         this.setState({
+          result: results,
           image: image,
           name: name,
           phone: phone,
           email: email,
-          dob: dob,
+          dob: newDob,
         });
 
         console.log(this.state.image);
@@ -44,6 +55,7 @@ class Home extends Component {
         console.log(this.state.phone);
         console.log(this.state.email);
         console.log(this.state.dob);
+        console.log(this.state.result);
       })
       .catch((err) => console.log(err));
   }
@@ -63,7 +75,6 @@ class Home extends Component {
           phone={this.state.phone}
           email={this.state.email}
           dob={this.state.dob}
-          counter={this.state.counter}
         />
       </div>
     );
