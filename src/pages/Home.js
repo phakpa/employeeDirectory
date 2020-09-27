@@ -64,10 +64,8 @@ class Home extends Component {
     if (tempStr !== "") {
       let origResults = this.state.result;
       let tempResult = origResults.filter((x) =>
-        x.name.last.toLowerCase().includes(tempStr.toLowerCase())
+        x.name.first.toLowerCase().includes(tempStr.toLowerCase())
       );
-
-      console.log(tempResult);
 
       let results = tempResult;
       let image = [];
@@ -137,12 +135,95 @@ class Home extends Component {
     }
   };
 
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ search: "" });
+    let employeeData = this.state.result;
+    console.log(event.target.value);
+    if (event.target.value === "ascending") {
+      let employeeSortName = employeeData.sort((a, b) =>
+        a.name.first > b.name.first ? 1 : -1
+      );
+
+      let results = employeeSortName;
+      let image = [];
+      let name = [];
+      let phone = [];
+      let email = [];
+      let dob = results.map((e) => {
+        return e.dob.date.slice(0, 10);
+      });
+
+      let newDob = [];
+      for (let i = 0; i < dob.length; i++) {
+        let year = dob[i].slice(0, 4);
+
+        let month = dob[i].slice(5, 7);
+        let day = dob[i].slice(8, 10);
+        newDob.push(month + "-" + day + "-" + year);
+      }
+
+      for (let i = 0; i < results.length; i++) {
+        image.push(results[i].picture.medium);
+        name.push(results[i].name.first + " " + results[i].name.last);
+        phone.push(results[i].phone);
+        email.push(results[i].email);
+      }
+
+      this.setState({
+        image: image,
+        name: name,
+        phone: phone,
+        email: email,
+        dob: newDob,
+      });
+    } else {
+      let employeeSortName = employeeData.sort((a, b) =>
+        a.name.first > b.name.first ? -1 : 1
+      );
+
+      let results = employeeSortName;
+      let image = [];
+      let name = [];
+      let phone = [];
+      let email = [];
+      let dob = results.map((e) => {
+        return e.dob.date.slice(0, 10);
+      });
+
+      let newDob = [];
+      for (let i = 0; i < dob.length; i++) {
+        let year = dob[i].slice(0, 4);
+
+        let month = dob[i].slice(5, 7);
+        let day = dob[i].slice(8, 10);
+        newDob.push(month + "-" + day + "-" + year);
+      }
+
+      for (let i = 0; i < results.length; i++) {
+        image.push(results[i].picture.medium);
+        name.push(results[i].name.first + " " + results[i].name.last);
+        phone.push(results[i].phone);
+        email.push(results[i].email);
+      }
+
+      this.setState({
+        image: image,
+        name: name,
+        phone: phone,
+        email: email,
+        dob: newDob,
+      });
+    }
+  };
+
   render() {
     return (
       <div>
         <SearchForm
           search={this.state.search}
           handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
         />
         <TableEmployee
           image={this.state.image}

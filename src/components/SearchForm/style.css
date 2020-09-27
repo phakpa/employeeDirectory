@@ -1,3 +1,9 @@
 .center-align {
   text-align: center;
 }
+
+.heading {
+  background-color: lightgreen;
+  color: rgb(95, 24, 128);
+  padding: 100px;
+}
