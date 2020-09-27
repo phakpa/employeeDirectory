@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/employeedirectory" component={Home} />
       </div>
     </Router>
   );
